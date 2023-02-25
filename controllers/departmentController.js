@@ -10,7 +10,19 @@ const getDepartments = async (req, res) => {
     }
 }
 
+const createDepartment = async (req, res) => {
+    const department = req.body;
+
+    try {
+        const newDepartment = await Department.create(department);
+        res.status(201).json(newDepartment);
+    } catch (error) {
+        res.status(409).json({ message: error.message });
+    }
+}
+
 
 module.exports = {
-    getDepartments
+    getDepartments,
+    createDepartment
 }

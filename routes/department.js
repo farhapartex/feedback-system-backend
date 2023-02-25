@@ -1,5 +1,5 @@
 const express = require('express');
-const { getDepartments } = require('../controllers/departmentController');
+const { getDepartments, createDepartment } = require('../controllers/departmentController');
 
 const router = express.Router();
 
@@ -9,9 +9,7 @@ router.get('/:id', (req, res) => {
     res.send('Feedback details');
 })
 
-router.post('/', (req, res) => {
-    res.send('New Feedback');
-})
+router.post('/', createDepartment)
 
 router.delete('/:id', (req, res) => {
     res.send('Delete Feedback');
