@@ -1,9 +1,9 @@
 const express = require('express');
-const { getFeedbacks } = require('../controllers/feedbackController');
+const { getDepartments } = require('../controllers/departmentController');
 
 const router = express.Router();
 
-router.get('/', getFeedbacks)
+router.get('/', getDepartments)
 
 router.get('/:id', (req, res) => {
     res.send('Feedback details');

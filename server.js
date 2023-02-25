@@ -4,6 +4,7 @@ const express = require('express');
 const mongoose = require('mongoose');
 
 const feedbacksRoutes = require('./routes/feedbacks');
+const departmentRoutes = require('./routes/department');
 
 const app = express();
 
@@ -16,7 +17,8 @@ app.use((req, res, next) => {
 })
 
 // routes
-app.use('/api/feedbacks', feedbacksRoutes)
+app.use('/api/v1/departments', departmentRoutes)
+app.use('/api/v1/feedbacks', feedbacksRoutes)
 
 
 
