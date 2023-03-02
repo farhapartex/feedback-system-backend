@@ -21,8 +21,37 @@ const createFeedback = async (req, res) => {
     }
 }
 
+const getSingleFeedback = async (req, res) => {
+    const { id } = req.params;
+
+    if (!mongoose.Types.ObjectId.isValid(id)) return res.status(404).send('No feedback with that id');
+
+    const feedback = await Feedback.findById(id);
+    if (!feedback) return res.status(404).send('No feedback with that id');
+
+    res.status(200).json(feedback);
+}
+
+// TODO: have to add JWT token to this route
+const updateFeedbackByAdmin = async (req, res) => {
+    const { id } = req.params;
+
+    if (!mongoose.Types.ObjectId.isValid(id)) {
+        return res.status(404).send('No feedback with that id');
+    }
+
+    // {new: true} will return the updated object
+    const feedback = await Feedback.findOneAndUpdate({ _id: id }, { ...req.body }, { new: true });
+
+    if (!feedback) return res.status(404).send('No feedback with that id');
+
+    res.status(200).json(feedback);
+}
+
 
 module.exports = {
     getFeedbacks,
-    createFeedback
+    createFeedback,
+    getSingleFeedback,
+    updateFeedbackByAdmin
 }
