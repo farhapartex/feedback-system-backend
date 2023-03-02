@@ -1,4 +1,4 @@
-const { Department, Feedback } = require('../models/feedback');
+const { Feedback, FeedbackComment } = require('../models/feedback');
 const mongoose = require('mongoose');
 
 const getFeedbacks = async (req, res) => {
@@ -48,10 +48,20 @@ const updateFeedbackByAdmin = async (req, res) => {
     res.status(200).json(feedback);
 }
 
+const createFeedbackComment = async (req, res) => {
+    try {
+        const feedbackComment = await FeedbackComment.create(req.body);
+        res.status(201).json(feedbackComment);
+    } catch (error) {
+        res.status(409).json({ message: error.message });
+    }
+}
+
 
 module.exports = {
     getFeedbacks,
     createFeedback,
     getSingleFeedback,
-    updateFeedbackByAdmin
+    updateFeedbackByAdmin,
+    createFeedbackComment
 }

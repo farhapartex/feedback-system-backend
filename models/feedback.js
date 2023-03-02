@@ -43,7 +43,20 @@ const feedbackSchema = new Schema({
     }
 }, { timestamps: true });
 
+
+const feedbackCommentSchema = new Schema({
+    feedback: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Feedback'
+    },
+    comment: {
+        type: String,
+        required: true
+    }
+})
+
 module.exports = {
     Department: mongoose.model('Department', departmentSchema),
-    Feedback: mongoose.model('Feedback', feedbackSchema)
+    Feedback: mongoose.model('Feedback', feedbackSchema),
+    FeedbackComment: mongoose.model('FeedbackComment', feedbackCommentSchema)
 };
