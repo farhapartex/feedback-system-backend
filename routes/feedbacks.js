@@ -1,5 +1,5 @@
 const express = require('express');
-const { getFeedbacks, createFeedback, updateFeedbackByAdmin, getSingleFeedback, createFeedbackComment } = require('../controllers/feedbackController');
+const { getFeedbacks, createFeedback, updateFeedbackByAdmin, getSingleFeedback, createFeedbackComment, getCommentsByFeedbackId } = require('../controllers/feedbackController');
 
 const router = express.Router();
 
@@ -16,5 +16,7 @@ router.delete('/:id', (req, res) => {
 })
 
 router.patch('/:id', updateFeedbackByAdmin)
+
+router.get('/:feedbackId/comments', getCommentsByFeedbackId)
 
 module.exports = router;

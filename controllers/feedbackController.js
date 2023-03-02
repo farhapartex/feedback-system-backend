@@ -57,11 +57,24 @@ const createFeedbackComment = async (req, res) => {
     }
 }
 
+const getCommentsByFeedbackId = async (req, res) => {
+    const { feedbackId } = req.params;
+
+    if (!mongoose.Types.ObjectId.isValid(feedbackId)) return res.status(404).send({ error: 'No feedback with that id' });
+
+    const comments = await FeedbackComment.find({ feedback: feedbackId });
+
+    if (!comments) return res.status(404).send({ error: 'No comments for this feedback' });
+
+    res.status(200).json(comments);
+}
+
 
 module.exports = {
     getFeedbacks,
     createFeedback,
     getSingleFeedback,
     updateFeedbackByAdmin,
-    createFeedbackComment
+    createFeedbackComment,
+    getCommentsByFeedbackId
 }
