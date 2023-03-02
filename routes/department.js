@@ -1,13 +1,11 @@
 const express = require('express');
-const { getDepartments, createDepartment } = require('../controllers/departmentController');
+const { getDepartments, createDepartment, getSingleDepartment } = require('../controllers/departmentController');
 
 const router = express.Router();
 
 router.get('/', getDepartments)
 
-router.get('/:id', (req, res) => {
-    res.send('Feedback details');
-})
+router.get('/:id', getSingleDepartment)
 
 router.post('/', createDepartment)
 
