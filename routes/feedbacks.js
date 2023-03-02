@@ -1,5 +1,5 @@
 const express = require('express');
-const { getFeedbacks } = require('../controllers/feedbackController');
+const { getFeedbacks, createFeedback } = require('../controllers/feedbackController');
 
 const router = express.Router();
 
@@ -9,9 +9,7 @@ router.get('/:id', (req, res) => {
     res.send('Feedback details');
 })
 
-router.post('/', (req, res) => {
-    res.send('New Feedback');
-})
+router.post('/', createFeedback)
 
 router.delete('/:id', (req, res) => {
     res.send('Delete Feedback');

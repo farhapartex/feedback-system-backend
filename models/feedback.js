@@ -25,8 +25,8 @@ const feedbackSchema = new Schema({
         required: true,
     },
     department: {
-        type: departmentSchema,
-        required: true
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Department'
     },
     isApprovedByAdmin: {
         type: Boolean,

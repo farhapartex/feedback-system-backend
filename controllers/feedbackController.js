@@ -10,7 +10,19 @@ const getFeedbacks = async (req, res) => {
     }
 }
 
+const createFeedback = async (req, res) => {
+    const feedback = req.body;
+
+    try {
+        const newFeedback = await Feedback.create(feedback);
+        res.status(201).json(newFeedback);
+    } catch (error) {
+        res.status(409).json({ message: error.message });
+    }
+}
+
 
 module.exports = {
-    getFeedbacks
+    getFeedbacks,
+    createFeedback
 }
