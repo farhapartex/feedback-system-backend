@@ -1,5 +1,5 @@
 const express = require('express');
-const { getDepartments, createDepartment, getSingleDepartment } = require('../controllers/departmentController');
+const { getDepartments, createDepartment, getSingleDepartment, updateDepartment } = require('../controllers/departmentController');
 
 const router = express.Router();
 
@@ -13,8 +13,6 @@ router.delete('/:id', (req, res) => {
     res.send('Delete Feedback');
 })
 
-router.patch('/:id', (req, res) => {
-    res.send('Update Feedback');
-})
+router.patch('/:id', updateDepartment)
 
 module.exports = router;

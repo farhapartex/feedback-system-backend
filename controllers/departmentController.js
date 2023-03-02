@@ -32,8 +32,23 @@ const createDepartment = async (req, res) => {
 }
 
 
+const updateDepartment = async (req, res) => {
+    const { id } = req.params;
+
+    if (!mongoose.Types.ObjectId.isValid(id)) {
+        return res.status(404).send('No department with that id');
+    }
+
+    const department = await Department.findOneAndUpdate({ _id: id }, { ...req.body }, { new: true, upsert: true });
+    if (!department) return res.status(404).send('No department with that id');
+
+    res.status(200).json(department);
+
+}
+
 module.exports = {
     getDepartments,
     createDepartment,
-    getSingleDepartment
+    getSingleDepartment,
+    updateDepartment
 }
