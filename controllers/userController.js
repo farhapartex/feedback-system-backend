@@ -59,6 +59,7 @@ const userLogin = async (req, res) => {
                 firstName: existingUser.firstName,
                 lastName: existingUser.lastName,
                 username: existingUser.username,
+                isAdmin: existingUser.isAdmin
             }
         })
     } catch (error) {
