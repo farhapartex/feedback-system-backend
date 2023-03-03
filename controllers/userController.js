@@ -28,6 +28,8 @@ const registerEmployee = async (req, res) => {
     }
 }
 
+// https://levelup.gitconnected.com/authentication-using-jwt-in-mern-1cc5c8ccd03c
+
 
 module.exports = {
     registerEmployee
