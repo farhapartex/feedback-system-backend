@@ -32,16 +32,23 @@ const getSingleFeedback = async (req, res) => {
     res.status(200).json(feedback);
 }
 
-// TODO: have to add JWT token to this route
 const updateFeedbackByAdmin = async (req, res) => {
+    const user = req.user;
+    console.log(user);
     const { id } = req.params;
 
     if (!mongoose.Types.ObjectId.isValid(id)) {
         return res.status(404).send('No feedback with that id');
     }
 
+    const data = req.body;
+
+    if (user.isAdmin === false && data.isResolved !== null) {
+        return res.status(403).send({ error: 'You are not authorized to resolve this feedback' });
+    }
+
     // {new: true} will return the updated object
-    const feedback = await Feedback.findOneAndUpdate({ _id: id }, { ...req.body }, { new: true });
+    const feedback = await Feedback.findOneAndUpdate({ _id: id }, { ...data }, { new: true });
 
     if (!feedback) return res.status(404).send('No feedback with that id');
 
